@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,18 +12,26 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import { loginCall } from './apiCalls';
+import { AuthContext } from '../contexts/AuthContext';
 
 
 const theme = createTheme();
 
 export default function Login() {
+
+  const {user, isFetching, error, dispatch} = useContext(AuthContext)
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const email = data.get('email')
+    const password = data.get('password')
+
+    loginCall({email: email, password: password}, dispatch)
   };
 
   return (
@@ -58,7 +66,9 @@ export default function Login() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
+
               Log in
+
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -91,7 +101,8 @@ export default function Login() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Log In
+                {isFetching? (<CircularProgress color="inherit" size={15}/>) : ("Log in")}
+
               </Button>
               <Grid container>
                 {/* <Grid item xs>
