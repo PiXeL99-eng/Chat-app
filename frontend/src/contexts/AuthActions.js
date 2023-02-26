@@ -11,3 +11,17 @@ export const LoginFailure = (error) => ({
     type: "LOGIN_FAILURE",
     payload: error, 
 })
+
+export const SignupStart = (userCredentials) => ({
+    type: "SIGNUP_START",
+})
+
+export const SignupSuccess = (user) => ({
+    type: "SIGNUP_SUCCESS",
+    payload: user,
+})
+
+export const SignupFailure = (error) => ({
+    type: "SIGNUP_FAILURE",
+    payload: error, 
+})

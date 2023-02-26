@@ -1,0 +1,46 @@
+*{
+    border: 0;
+    margin: 0;
+}
+.bubble{
+    max-width: 50%;
+    background-color: #454e4e;
+    padding-top: 11px;
+    padding-bottom: 8px;
+    padding-left: 18px;
+    padding-right: 18px;
+    border-radius: 7px;
+    width: fit-content;
+    color: white;
+    font-size: 17px;
+    margin: 6px 0px;
+    font-family: 'Roboto';
+    /* display: flex;
+    justify-content: space-between; */
+}
+
+.time-ago{
+    color: #959595;
+    font-size: 13px;
+}
+
+.bubble-text{
+    margin-bottom: 8px;
+    text-align: start;
+}
+
+.bubble-space{
+    display: flex;
+    flex-direction: row;
+}
+
+.bubble-space-rev{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.chat-area{
+    height: 79vh;
+    padding: 1px 20px;
+    background-color: #daffe9;
+}

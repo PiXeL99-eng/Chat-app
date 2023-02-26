@@ -10,7 +10,7 @@ const INITAL_STATE = {
 export const AuthContext = createContext(INITAL_STATE)
 
 export const AuthContextProvider = ({children}) => {
-    const [state, dispatch] = useReducer(AuthReducer, INITAL_STATE);
+    var [state, dispatch] = useReducer(AuthReducer, INITAL_STATE);
 
     return (
         <AuthContext.Provider value={
