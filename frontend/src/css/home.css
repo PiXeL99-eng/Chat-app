@@ -43,4 +43,5 @@
     height: 79vh;
     padding: 1px 20px;
     background-color: #daffe9;
+    overflow-y: scroll;
 }

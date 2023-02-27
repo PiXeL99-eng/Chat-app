@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState, useRef} from "react";
 import {Left_Container, Right_Container} from "../components/home_comp";
 
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext';
 
 import Grid from '@mui/material/Grid';
+import {io} from "socket.io-client"
 
 import "../css/home.css"
 
@@ -13,20 +14,33 @@ export default function Home() {
     const navigate = useNavigate();
     const {user, isFetching, error, dispatch} = useContext(AuthContext)
 
+    const socket = useRef()
+
     useEffect(() => {
 
-        console.log("inside home", user)
         if(!user){
-            // return navigate("/login");
+            return navigate("/login");
         }
 
     }, [])
+
+    useEffect(() => {
+
+        socket.current = io("ws://localhost:8900")
+    }, [])
+
+    useEffect(() => {
+        socket?.current.emit("addUser", user.email)
+        socket?.current.on("getUsers", users => {
+            console.log(users)
+        })
+    }, [user])
     
     return (
 
         <>
             {
-            // !isFetching && user &&
+            !isFetching && user &&
 
                 <>
                     <div className="home-page">
@@ -35,7 +49,7 @@ export default function Home() {
                                     <Left_Container/>
                             </Grid>
                             <Grid item xs={8}>
-                                    <Right_Container/>
+                                    <Right_Container socket={socket}/>
                             </Grid>
                         </Grid>
                     </div>

@@ -1,33 +1,74 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import { sendText } from '../../pages/apiCalls';
 
-export default function New_Text() {
+import { AuthContext } from '../../contexts/AuthContext';
+
+export default function New_Text(props) {
 
     const [newText, setNewText] = useState('')
+
+    const {user} = useContext(AuthContext)
     
+    async function handleSubmit(event){
+      event.preventDefault();
+      // console.log(newText);
+
+      const receiverEmail = user.email === "abc@gmail.com"? "sayan@gmail.com": "abc@gmail.com"        //get all members of this conversation
+
+      props.socket?.current.emit("sendMessage", {
+        senderEmail: user.email,
+        receiverEmail: receiverEmail,
+        text: newText,
+        conversationId: '63fc5dd9eec9dcf6ded271ac'
+        // conversationId: props.conversationId
+      })
+
+      await sendText({text: newText, sender: user.email, conversationId: '63fc5dd9eec9dcf6ded271ac', time: `${Date.now()}`})
+      // await sendText({text: newText, sender: 'sayan@gmail.com', conversationId: '63fc5dd9eec9dcf6ded271ac', time: `${Date.now()}`})
+
+      setNewText('')
+
+    }
     return (
       <Box
         component="form"
+        onSubmit={handleSubmit}
         sx={{
+          display: 'flex',
+          alignItems: 'center',
+          // justifyContent: 'center',
           '& .MuiTextField-root': { m: 1, width: 850, maxWidth: '100%' },
         }}
         noValidate
         autoComplete="off"
       >
-        <div>
           <TextField
             id="outlined-multiline-static"
             label="Type your text"
             multiline
             fullWidth
-            rows={1.2}
+            rows={1}
             value={newText}
             onChange={(event) => {
               setNewText(event.target.value);
             }}
           />
-        </div>
+          <IconButton color="primary" aria-label="upload picture" component="label" 
+          sx={{
+            mr: 1
+          }}>
+            <input hidden accept="image/*" type="file" />
+            <PhotoCamera />
+          </IconButton>
+          <Button size='24px' variant="contained" endIcon={<SendIcon/>} type="submit">
+            Send
+          </Button>
       </Box>
     );
 }

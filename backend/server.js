@@ -29,7 +29,7 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 // app.use("/api/users", userRoute);
-// app.use("/conversations", conversationRoute);
+app.use("/conversations", conversationRoute);
 // app.use("/messages", messageRoute);
 
 app.listen(8800, () => {

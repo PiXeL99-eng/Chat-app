@@ -28,7 +28,7 @@ export default function Login() {
 
   useEffect(() => {
 
-    console.log("inside login", user)
+    // console.log("inside login", user)
 
       if(user){
           return navigate("/");

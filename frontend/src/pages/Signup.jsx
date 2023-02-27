@@ -25,7 +25,7 @@ export default function SignUp() {
 
   useEffect(() => {
 
-    console.log("inside signup", user)
+    // console.log("inside signup", user)
 
       if(user){
           return navigate("/");
