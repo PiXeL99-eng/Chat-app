@@ -23,18 +23,24 @@ export default function Chat_Area(props) {
   }, [])
 
   useEffect(() => {
+
     props.socket.current?.on("getMessage", data => {
+
+      console.log(data)
         setNewMessage({
             sender: data.sender,
             text: data.text,
-            time: Date.now()
+            time: Date.now(),
+            conversationId: data.conversationId
         })
     })
+
   }, [])
 
   useEffect(() => {
 
     //receive current convid from props
+
     newMessage && '63fc5dd9eec9dcf6ded271ac' === newMessage.conversationId && 
     setMessages((prev) => [...prev, {
         text: newMessage.text,
@@ -42,7 +48,8 @@ export default function Chat_Area(props) {
         time: newMessage.time
     }])
 
-  }, [ newMessage/* may add convId here*/])
+  }, [newMessage, '63fc5dd9eec9dcf6ded271ac'])
+  // }, [ newMessage/* may add convId here*/])
 
   return (
     <div className='chat-area'>

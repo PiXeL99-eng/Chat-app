@@ -14,7 +14,7 @@ export default function Home() {
     const navigate = useNavigate();
     const {user, isFetching, error, dispatch} = useContext(AuthContext)
 
-    const socket = useRef()
+    const socket = useRef(null)
 
     useEffect(() => {
 
@@ -22,16 +22,13 @@ export default function Home() {
             return navigate("/login");
         }
 
-    }, [])
-
-    useEffect(() => {
-
         socket.current = io("ws://localhost:8900")
+
     }, [])
 
     useEffect(() => {
-        socket?.current.emit("addUser", user.email)
-        socket?.current.on("getUsers", users => {
+        socket.current?.emit("addUser", user.email)
+        socket.current?.on("getUsers", users => {
             console.log(users)
         })
     }, [user])

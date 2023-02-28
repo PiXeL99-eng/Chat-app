@@ -18,6 +18,7 @@ export default function New_Text(props) {
     async function handleSubmit(event){
       event.preventDefault();
       // console.log(newText);
+      setNewText('')
 
       const receiverEmail = user.email === "abc@gmail.com"? "sayan@gmail.com": "abc@gmail.com"        //get all members of this conversation
 
@@ -32,9 +33,18 @@ export default function New_Text(props) {
       await sendText({text: newText, sender: user.email, conversationId: '63fc5dd9eec9dcf6ded271ac', time: `${Date.now()}`})
       // await sendText({text: newText, sender: 'sayan@gmail.com', conversationId: '63fc5dd9eec9dcf6ded271ac', time: `${Date.now()}`})
 
-      setNewText('')
 
     }
+
+    function handleKeyDown(event) {
+
+      if (event.key === 'Enter') {
+
+        event.preventDefault();
+        handleSubmit(event)
+      }
+    }
+
     return (
       <Box
         component="form"
@@ -58,6 +68,7 @@ export default function New_Text(props) {
             onChange={(event) => {
               setNewText(event.target.value);
             }}
+            onKeyDown={handleKeyDown}
           />
           <IconButton color="primary" aria-label="upload picture" component="label" 
           sx={{
