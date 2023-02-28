@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, {useState, useEffect, useContext} from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,27 +8,22 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+// import AdbIcon from '@mui/icons-material/Adb';
+import {fetchReceiver} from "../../pages/apiCalls"
+import { AuthContext } from '../../contexts/AuthContext';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-export default function Active_Bar() {
+export default function ActiveBar(props) {
     
-//   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [receiverName, setReceiverName] = useState([])
+  const {user} = useContext(AuthContext)
 
-//   const handleOpenNavMenu = (event) => {
-    //     setAnchorElNav(event.currentTarget);
-    //   };
-    
-//   const handleCloseNavMenu = () => {
-    //     setAnchorElNav(null);
-    //   };
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-        
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -37,6 +31,20 @@ export default function Active_Bar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  useEffect(() => {
+    //if is not group
+
+    const func_fetch_receiver = async () => {
+
+      const data = await fetchReceiver(props.conversationId, user.email)
+      // const data = await fetchText('63fc5dd9eec9dcf6ded271ac')
+      setReceiverName(data)
+    }
+
+    func_fetch_receiver()
+
+  }, [props.conversationId])
 
   return (
     <AppBar position="static">
@@ -59,7 +67,7 @@ export default function Active_Bar() {
               textDecoration: 'none',
             }}
           >
-            Rahul
+            {receiverName.map((name) => <span>{name} </span>)}
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

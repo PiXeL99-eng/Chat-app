@@ -1,9 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
+import MyDrawer from './MyDrawer'
+import ConvBox from './ConvBox'
 
-export default function Left_Container() {
+export default function RightContainer(props) {
+
   return (
     <div className='left-container'>
-        Left_Container
+        <MyDrawer />
+        <ConvBox conversationId={props.conversationId} setConversationId={props.setConversationId}/>
     </div>
   )
 }

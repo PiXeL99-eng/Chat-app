@@ -9,7 +9,7 @@ import { sendText } from '../../pages/apiCalls';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
-export default function New_Text(props) {
+export default function NewText(props) {
 
     const [newText, setNewText] = useState('')
 
@@ -20,17 +20,23 @@ export default function New_Text(props) {
       // console.log(newText);
       setNewText('')
 
+      props.setMessages((prev) => [...prev, {
+        text: newText,
+        sender: user.email,
+        time: `${Date.now()}`
+      }])
+
       const receiverEmail = user.email === "abc@gmail.com"? "sayan@gmail.com": "abc@gmail.com"        //get all members of this conversation
 
       props.socket?.current.emit("sendMessage", {
         senderEmail: user.email,
         receiverEmail: receiverEmail,
         text: newText,
-        conversationId: '63fc5dd9eec9dcf6ded271ac'
-        // conversationId: props.conversationId
+        conversationId: props.conversationId
+        // conversationId: '63fc5dd9eec9dcf6ded271ac'
       })
 
-      await sendText({text: newText, sender: user.email, conversationId: '63fc5dd9eec9dcf6ded271ac', time: `${Date.now()}`})
+      await sendText({text: newText, sender: user.email, conversationId: props.conversationId, time: `${Date.now()}`})
       // await sendText({text: newText, sender: 'sayan@gmail.com', conversationId: '63fc5dd9eec9dcf6ded271ac', time: `${Date.now()}`})
 
 
@@ -38,17 +44,18 @@ export default function New_Text(props) {
 
     function handleKeyDown(event) {
 
-      if (event.key === 'Enter') {
-
+      if(event.key === 'Enter'){
         event.preventDefault();
         handleSubmit(event)
       }
+      
     }
 
     return (
       <Box
         component="form"
         onSubmit={handleSubmit}
+        onKeyDown={handleKeyDown} 
         sx={{
           display: 'flex',
           alignItems: 'center',
@@ -68,7 +75,6 @@ export default function New_Text(props) {
             onChange={(event) => {
               setNewText(event.target.value);
             }}
-            onKeyDown={handleKeyDown}
           />
           <IconButton color="primary" aria-label="upload picture" component="label" 
           sx={{

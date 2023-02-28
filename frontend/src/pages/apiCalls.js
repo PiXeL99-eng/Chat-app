@@ -41,3 +41,24 @@ export const fetchText = async (conversationId) => {
         return err
     }
 }
+
+export const fetchReceiver = async (conversationId, user_email) => {
+
+    try{
+        const res = await axios.get("http://localhost:8800/conversations/receiver", { params: { conversationId: conversationId } });
+        const arr = res.data.members
+        const final = []
+        for(let i=0; i<arr.length; i++){
+
+            if(arr[i].email!==user_email){
+
+                final.push(arr[i].username)
+            }
+        }
+        return final
+
+    } catch(err){
+        console.log(err)
+        return err
+    }
+}

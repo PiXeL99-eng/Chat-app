@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState, useRef} from "react";
-import {Left_Container, Right_Container} from "../components/home_comp";
+import {LeftContainer, RightContainer} from "../components/home_comp";
 
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext';
@@ -13,7 +13,7 @@ export default function Home() {
 
     const navigate = useNavigate();
     const {user, isFetching, error, dispatch} = useContext(AuthContext)
-
+    const [conversationId, setConversationId] = useState('63fe2f70abe85ccff93d50ce')        //set null initially
     const socket = useRef(null)
 
     useEffect(() => {
@@ -43,10 +43,10 @@ export default function Home() {
                     <div className="home-page">
                         <Grid container spacing={2}>
                             <Grid item xs={4}>
-                                    <Left_Container/>
+                                    <LeftContainer conversationId={conversationId} setConversationId={setConversationId} />
                             </Grid>
                             <Grid item xs={8}>
-                                    <Right_Container socket={socket}/>
+                                    <RightContainer socket={socket} conversationId={conversationId} setConversationId={setConversationId}/>
                             </Grid>
                         </Grid>
                     </div>

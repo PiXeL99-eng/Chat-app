@@ -14,6 +14,7 @@ router.post("/signup", async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
+      conversations: []
     });
 
     //save user and respond

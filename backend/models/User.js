@@ -20,6 +20,10 @@ const UserSchema = new mongoose.Schema(
       required: true,
     //   min: 6,
     },
+    conversations: {
+      type: Array
+    //   min: 6,
+    },
     // profilePicture: {
     //   type: String,
     //   default: "",

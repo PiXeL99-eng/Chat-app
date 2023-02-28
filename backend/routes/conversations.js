@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Conversation = require("../models/Conversation");
+const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
 //new message
@@ -41,6 +42,17 @@ router.post("/create", async (req, res) => {
     
         //save conversation
         const conv = await newConv.save();
+
+        req.body.members.map(async (member) => {
+
+          let user = await User.findOne({ email: member.email });
+          let convos = user.conversations
+          convos.push(conv._id)
+
+          user = await User.findOneAndUpdate({ email: member.email }, {conversations: convos});
+
+        })
+        
         res.status(200).json(conv);
       } catch (err) {
         console.log("works")
@@ -58,6 +70,23 @@ router.get("/conversation", async (req, res) => {
       let doc = await Conversation.findOne(filter)
 
       res.status(200).json({messages: doc.messages});
+      } catch (err) {
+        console.log("error")
+        res.status(500).json(err)
+      }
+});
+
+//get receiver details
+router.get("/receiver", async (req, res) => {
+    try {
+
+      // console.log(req)
+      const filter = {_id: req.query.conversationId}
+
+      let doc = await Conversation.findOne(filter)
+      // console.log(doc)
+
+      res.status(200).json({members: doc.members});
       } catch (err) {
         console.log("error")
         res.status(500).json(err)

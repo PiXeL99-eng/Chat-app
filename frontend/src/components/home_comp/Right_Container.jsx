@@ -1,14 +1,19 @@
-import React from 'react'
-import Active_Bar from './Active_Bar'
-import Chat_Area from './Chat_Area'
-import New_Text from './New_Text'
+import React, {useState} from 'react'
+import ActiveBar from './Active_Bar'
+import ChatArea from './Chat_Area'
+import NewText from './New_Text'
 
-export default function Right_Container(props) {
+export default function RightContainer(props) {
+
+  const [messages, setMessages] = useState([])
+
   return (
     <div className='right-container'>
-        <Active_Bar socket={props.socket}/>
-        <Chat_Area socket={props.socket}/>
-        <New_Text socket={props.socket}/>
+        {props.conversationId && 
+          <ActiveBar socket={props.socket} conversationId={props.conversationId} setConversationId={props.setConversationId}/> 
+        }
+        <ChatArea socket={props.socket} messages={messages} setMessages={setMessages} conversationId={props.conversationId} setConversationId={props.setConversationId}/>
+        <NewText socket={props.socket} messages={messages} setMessages={setMessages} conversationId={props.conversationId} setConversationId={props.setConversationId}/>
     </div>
   )
 }
