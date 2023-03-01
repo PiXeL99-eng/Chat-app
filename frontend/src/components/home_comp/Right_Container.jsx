@@ -9,11 +9,14 @@ export default function RightContainer(props) {
 
   return (
     <div className='right-container'>
-        {props.conversationId && 
-          <ActiveBar socket={props.socket} conversationId={props.conversationId} setConversationId={props.setConversationId}/> 
+        {props.conversationId &&
+        
+          <>
+            <ActiveBar socket={props.socket} conversationId={props.conversationId} setConversationId={props.setConversationId}/> 
+            <ChatArea socket={props.socket} messages={messages} setMessages={setMessages} conversationId={props.conversationId} setConversationId={props.setConversationId}/>
+            <NewText socket={props.socket} messages={messages} setMessages={setMessages} conversationId={props.conversationId} setConversationId={props.setConversationId}/>
+          </>
         }
-        <ChatArea socket={props.socket} messages={messages} setMessages={setMessages} conversationId={props.conversationId} setConversationId={props.setConversationId}/>
-        <NewText socket={props.socket} messages={messages} setMessages={setMessages} conversationId={props.conversationId} setConversationId={props.setConversationId}/>
     </div>
   )
 }

@@ -6,7 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { sendText } from '../../pages/apiCalls';
-
+import {fetchReceiver} from "../../pages/apiCalls"
 import { AuthContext } from '../../contexts/AuthContext';
 
 export default function NewText(props) {
@@ -26,17 +26,19 @@ export default function NewText(props) {
         time: `${Date.now()}`
       }])
 
-      const receiverEmail = user.email === "abc@gmail.com"? "sayan@gmail.com": "abc@gmail.com"        //get all members of this conversation
+      const data = await fetchReceiver(props.conversationId, user.email)        //get all members of this conversation
+      const receiverEmail = data[0].email       //get all members of this conversation
 
       props.socket?.current.emit("sendMessage", {
         senderEmail: user.email,
         receiverEmail: receiverEmail,
         text: newText,
-        conversationId: props.conversationId
+        conversationId: props.conversationId,
+        name: user.username
         // conversationId: '63fc5dd9eec9dcf6ded271ac'
       })
 
-      await sendText({text: newText, sender: user.email, conversationId: props.conversationId, time: `${Date.now()}`})
+      await sendText({text: newText, sender: user.email, name: user.username, conversationId: props.conversationId, time: `${Date.now()}`})
       // await sendText({text: newText, sender: 'sayan@gmail.com', conversationId: '63fc5dd9eec9dcf6ded271ac', time: `${Date.now()}`})
 
 

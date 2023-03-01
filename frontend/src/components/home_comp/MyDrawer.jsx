@@ -12,21 +12,34 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
-import {fetchReceiver} from "../../pages/apiCalls"
+// import {fetchReceiver} from "../../pages/apiCalls"
 import { AuthContext } from '../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { logoutCall } from '../../pages/apiCalls';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'New Ping', 'Logout'];
 export default function MyDrawer() {
 
+    const navigate = useNavigate()
+
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const {user} = useContext(AuthContext)
+    const {user, dispatch} = useContext(AuthContext)
   
     const handleOpenUserMenu = (event) => {
       setAnchorElUser(event.currentTarget);
     };
   
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (setting) => {
+
+      if(setting === 'Logout'){
+
+        localStorage.clear()
+        logoutCall(dispatch)
+        navigate('/login')
+
+      }
+
       setAnchorElUser(null);
     };
   
@@ -46,12 +59,12 @@ export default function MyDrawer() {
                 flexGrow: 1,
                 fontFamily: 'monospace',
                 fontWeight: 700,
-                letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
               }}
             >
               {user.username}
+              {/* PingPop */}
             </Typography>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
@@ -82,7 +95,7 @@ export default function MyDrawer() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}

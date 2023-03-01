@@ -14,7 +14,8 @@ router.post("/message", async (req, res) => {
     messages.push({
         text: req.body.text, 
         sender: req.body.sender, 
-        time: req.body.time
+        time: req.body.time,
+        name: req.body.name
     })
 
     const update = {messages: messages}
@@ -87,6 +88,45 @@ router.get("/receiver", async (req, res) => {
       // console.log(doc)
 
       res.status(200).json({members: doc.members});
+      } catch (err) {
+        console.log("error")
+        res.status(500).json(err)
+      }
+});
+
+//get all convs
+router.get("/allConvs", async (req, res) => {
+    try {
+
+      // console.log(req)
+      let filter = {email: req.query.email}
+
+      let doc = await User.findOne(filter)
+
+      let convs = doc.conversations
+      let details = []
+      
+      for(let i=0; i<convs.length; i++){
+        
+        filter = {_id: convs[i]}
+        let obj = {conversationId: '', name: '', message: '', time: ''}
+        doc =  await Conversation.findOne(filter)
+
+        // console.log(doc)
+
+        obj.time = `${doc.updatedAt}`
+        obj.conversationId = `${convs[i]}`
+        obj.name = `${ doc.members.filter((user) => user.email !== req.query.email)[0].username }`
+        obj.message = doc.messages.length!==0? `${ doc.messages[doc.messages.length - 1].text }` : ''
+        // obj.sender = `${ doc.messages[doc.messages.length - 1].name }`
+
+        details.push(obj)
+      }
+
+      // console.log(details)
+
+      res.status(200).json({convs: details});
+
       } catch (err) {
         console.log("error")
         res.status(500).json(err)

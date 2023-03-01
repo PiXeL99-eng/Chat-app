@@ -40,7 +40,8 @@ io.on("connection", (socket) => {
     socket.on("sendMessage", ({senderEmail, receiverEmail, text, conversationId}) => {
 
         const receiver = getUser(receiverEmail)
-        // console.log(users, receiverEmail, receiver, senderEmail, text)
+        // console.log(users, receiverEmail, receiver, senderEmail, text, conversationId)
+        
         receiver && 
             io.to(receiver.socketId).emit("getMessage", {
                 sender: senderEmail,

@@ -2,6 +2,11 @@
     border: 0;
     margin: 0;
 }
+
+.right-container{
+    background-color: rgb(245 239 206);
+    height: 100vh;
+}
 .bubble{
     max-width: 50%;
     background-color: #454e4e;
@@ -44,4 +49,9 @@
     padding: 1px 20px;
     background-color: #daffe9;
     overflow-y: scroll;
+}
+
+.short-info{
+    display: flex;
+    justify-content: space-between;
 }

@@ -13,8 +13,9 @@ export default function Home() {
 
     const navigate = useNavigate();
     const {user, isFetching, error, dispatch} = useContext(AuthContext)
-    const [conversationId, setConversationId] = useState('63fe2f70abe85ccff93d50ce')        //set null initially
-    const socket = useRef(null)
+    // const [conversationId, setConversationId] = useState('63fe2f70abe85ccff93d50ce')        //set null initially
+    const [conversationId, setConversationId] = useState(null)        //set null initially
+    const socket = useRef(io("ws://localhost:8900"))
 
     useEffect(() => {
 
@@ -22,15 +23,18 @@ export default function Home() {
             return navigate("/login");
         }
 
-        socket.current = io("ws://localhost:8900")
-
     }, [])
 
     useEffect(() => {
-        socket.current?.emit("addUser", user.email)
-        socket.current?.on("getUsers", users => {
-            console.log(users)
-        })
+
+        if(user){
+
+            socket.current?.emit("addUser", user.email)
+            socket.current?.on("getUsers", users => {
+                console.log(users)
+            })
+
+        }
     }, [user])
     
     return (
@@ -50,9 +54,6 @@ export default function Home() {
                             </Grid>
                         </Grid>
                     </div>
-
-                    {/* <Link to="/login">click to login</Link> */}
-                    {/* <Link to="/signup">click to signup</Link> */}
                 
                 </>
             }

@@ -25,3 +25,8 @@ export const SignupFailure = (error) => ({
     type: "SIGNUP_FAILURE",
     payload: error, 
 })
+
+export const LogoutSuccess = () => ({
+    type: "LOGOUT_SUCCESS",
+    payload: null, 
+})

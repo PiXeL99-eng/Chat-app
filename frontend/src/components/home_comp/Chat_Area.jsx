@@ -20,13 +20,17 @@ export default function ChatArea(props) {
 
     func_fetch_text()
 
-  }, [])
+  }, [props.conversationId])
 
+  console.log(props.socket.current)
   useEffect(() => {
 
     props.socket.current?.on("getMessage", data => {
 
-      console.log(data)
+      // console.log("received")
+
+      data.conversationId === props.conversationId &&
+
         setNewMessage({
             sender: data.sender,
             text: data.text,
@@ -35,7 +39,7 @@ export default function ChatArea(props) {
         })
     })
 
-  }, [])
+  }, [props.socket.current])
 
   useEffect(() => {
 
@@ -67,6 +71,8 @@ export default function ChatArea(props) {
         {props.messages.map(message => 
 
             // <div className={message.sender !== 'sayan@gmail.com'? 'bubble-space' : 'bubble-space-rev'}>
+            
+            //display sender name also, if group message
             <div className={message.sender !== user.email? 'bubble-space' : 'bubble-space-rev'}>
                 <div className='bubble'>
                     <div className='bubble-text'>{message.text}</div>

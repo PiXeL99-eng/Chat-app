@@ -22,6 +22,11 @@ export const signUpCall = async (userCredential, dispatch) => {
     }
 }
 
+export const logoutCall = (dispatch) => {
+
+    dispatch({type: "LOGOUT_SUCCESS", payload: null})
+}
+
 export const sendText = async (message) => {
 
     try{
@@ -52,10 +57,22 @@ export const fetchReceiver = async (conversationId, user_email) => {
 
             if(arr[i].email!==user_email){
 
-                final.push(arr[i].username)
+                final.push({name: arr[i].username, email: arr[i].email})
             }
         }
         return final
+
+    } catch(err){
+        console.log(err)
+        return err
+    }
+}
+
+export const fetchAllConvs = async (email) => {
+
+    try{
+        const res = await axios.get("http://localhost:8800/conversations/allConvs", { params: { email: email } });
+        return res.data.convs
 
     } catch(err){
         console.log(err)
