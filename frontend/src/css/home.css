@@ -55,3 +55,32 @@
     display: flex;
     justify-content: space-between;
 }
+
+.profile-img-div{
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+}
+
+.profile-name{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 33px;
+    font-family: 'Roboto';
+    border-radius: 10px;
+    border: 3px solid #4685e4;
+}
+
+.profile-email{
+    width: 78%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 33px;
+    font-family: 'Roboto';
+    border-radius: 10px;
+    border: 3px solid #4685e4;
+}

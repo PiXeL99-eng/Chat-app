@@ -37,13 +37,15 @@ io.on("connection", (socket) => {
     })
     
     //send message
-    socket.on("sendMessage", ({senderEmail, receiverEmail, text, conversationId}) => {
+    socket.on("sendMessage", ({senderEmail, receiverEmail, text, conversationId, isImage, fileUrl}) => {
 
         const receiver = getUser(receiverEmail)
         // console.log(users, receiverEmail, receiver, senderEmail, text, conversationId)
         
         receiver && 
             io.to(receiver.socketId).emit("getMessage", {
+                isImage: isImage,
+                fileUrl: fileUrl,
                 sender: senderEmail,
                 text: text,
                 conversationId: conversationId

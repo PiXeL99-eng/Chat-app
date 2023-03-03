@@ -45,7 +45,7 @@ export default function Home() {
 
                 <>
                     <div className="home-page">
-                        <Grid container spacing={2}>
+                        <Grid container spacing={0}>
                             <Grid item xs={4}>
                                     <LeftContainer conversationId={conversationId} setConversationId={setConversationId} />
                             </Grid>

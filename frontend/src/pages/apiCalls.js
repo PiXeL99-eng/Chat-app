@@ -27,6 +27,17 @@ export const logoutCall = (dispatch) => {
     dispatch({type: "LOGOUT_SUCCESS", payload: null})
 }
 
+export const newconvo = async (details) => {
+
+    try{
+        const res = await axios.post("http://localhost:8800/conversations/create", details);
+        return res.data.conversationId
+
+    } catch(err){
+        console.log(err)
+    }
+}
+
 export const sendText = async (message) => {
 
     try{
@@ -35,6 +46,7 @@ export const sendText = async (message) => {
         console.log(err)
     }
 }
+
 
 export const fetchText = async (conversationId) => {
 
@@ -73,6 +85,18 @@ export const fetchAllConvs = async (email) => {
     try{
         const res = await axios.get("http://localhost:8800/conversations/allConvs", { params: { email: email } });
         return res.data.convs
+
+    } catch(err){
+        console.log(err)
+        return err
+    }
+}
+
+export const fetchPeers = async (email) => {
+
+    try{
+        const res = await axios.get("http://localhost:8800/users/peers", { params: { email: email } });
+        return res.data.peers
 
     } catch(err){
         console.log(err)

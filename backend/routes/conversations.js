@@ -1,9 +1,25 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 const router = require("express").Router();
 const Conversation = require("../models/Conversation");
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
+const ImageKit = require('imagekit');
 
 //new message
+
+const imagekit = new ImageKit({
+  urlEndpoint: `${process.env.IMAGEKIT_URL_ENDPOINT}`,
+  publicKey: `${process.env.IMAGEKIT_PUBLIC_KEY}`,
+  privateKey: `${process.env.IMAGEKIT_PRIVATE_KEY}`
+});
+
+router.get('/img_auth', function (req, res) {
+  var result = imagekit.getAuthenticationParameters();
+  res.send(result);
+});
+
 router.post("/message", async (req, res) => {
   try {
 
@@ -12,6 +28,8 @@ router.post("/message", async (req, res) => {
     let doc = await Conversation.findOne(filter)
     let messages = doc.messages
     messages.push({
+        isImage: req.body.isImage,
+        fileUrl: req.body.fileUrl,
         text: req.body.text, 
         sender: req.body.sender, 
         time: req.body.time,
@@ -34,27 +52,64 @@ router.post("/message", async (req, res) => {
 //new conversation
 router.post("/create", async (req, res) => {
     try {
-    
-        //create new conversation
-        const newConv = new Conversation({
-          members: req.body.members,
-          messages: []
-        });
-    
-        //save conversation
-        const conv = await newConv.save();
 
-        req.body.members.map(async (member) => {
+        if(req.body.isGroup){
 
-          let user = await User.findOne({ email: member.email });
-          let convos = user.conversations
-          convos.push(conv._id)
+          //create new conversation
+          const newConv = new Conversation({
+            isGroup: req.body.isGroup,
+            groupName: req.body.groupName,
+            members: req.body.members,
+            messages: []
+          });
+      
+          //save conversation
+          const conv = await newConv.save();
+  
+          req.body.members.map(async (member) => {
+  
+            let user = await User.findOne({ email: member.email });
+            let convos = user.conversations
+            convos.push(conv._id)
+  
+            user = await User.findOneAndUpdate({ email: member.email }, {conversations: convos});
+  
+          })
+          
+          res.status(200).json({conversationId: conv._id});
 
-          user = await User.findOneAndUpdate({ email: member.email }, {conversations: convos});
+        }
+        else{
 
-        })
-        
-        res.status(200).json(conv);
+          let conv1 = await Conversation.findOne({ members: req.body.members });
+          let conv2 = await Conversation.findOne({ members: [req.body.members[1],  req.body.members[0]]});
+
+          conv1 && res.status(200).json({conversationId: conv1._id});
+          conv2 && res.status(200).json({conversationId: conv2._id});
+
+          const newConv = new Conversation({
+            isGroup: req.body.isGroup,
+            groupName: req.body.groupName,
+            members: req.body.members,
+            messages: []
+          });
+      
+          //save conversation
+          const conv = await newConv.save();
+  
+          req.body.members.map(async (member) => {
+  
+            let user = await User.findOne({ email: member.email });
+            let convos = user.conversations
+            convos.push(conv._id)
+  
+            user = await User.findOneAndUpdate({ email: member.email }, {conversations: convos});
+  
+          })
+          
+          res.status(200).json({conversationId: conv._id});
+
+        }
       } catch (err) {
         console.log("works")
         res.status(500).json(err)
@@ -109,7 +164,7 @@ router.get("/allConvs", async (req, res) => {
       for(let i=0; i<convs.length; i++){
         
         filter = {_id: convs[i]}
-        let obj = {conversationId: '', name: '', message: '', time: ''}
+        let obj = {conversationId: '', name: '', message: '', time: '', isFile: false}
         doc =  await Conversation.findOne(filter)
 
         // console.log(doc)
@@ -118,6 +173,7 @@ router.get("/allConvs", async (req, res) => {
         obj.conversationId = `${convs[i]}`
         obj.name = `${ doc.members.filter((user) => user.email !== req.query.email)[0].username }`
         obj.message = doc.messages.length!==0? `${ doc.messages[doc.messages.length - 1].text }` : ''
+        obj.isFile = doc.messages.length!==0? `${ doc.messages[doc.messages.length - 1].isFile }` : ''
         // obj.sender = `${ doc.messages[doc.messages.length - 1].name }`
 
         details.push(obj)

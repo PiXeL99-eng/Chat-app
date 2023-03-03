@@ -2,12 +2,14 @@ import React, {useEffect, useState, useContext, useRef} from 'react'
 import TimeAgo from 'timeago-react';
 import { fetchText } from '../../pages/apiCalls';
 import { AuthContext } from '../../contexts/AuthContext';
+import { IKImage } from 'imagekitio-react';
 
 export default function ChatArea(props) {
 
   const {user} = useContext(AuthContext)
   const [newMessage, setNewMessage ] = useState(null)
   const messagesEndRef = useRef(null)
+  const urlEndpoint = 'https://ik.imagekit.io/jvig43v5se/chat-app';
 
   useEffect(() => {
 
@@ -33,6 +35,8 @@ export default function ChatArea(props) {
 
         setNewMessage({
             sender: data.sender,
+            isImage: data.isImage,
+            fileUrl: data.fileUrl,
             text: data.text,
             time: Date.now(),
             conversationId: data.conversationId
@@ -47,6 +51,8 @@ export default function ChatArea(props) {
 
     newMessage && props.conversationId === newMessage.conversationId && 
     props.setMessages((prev) => [...prev, {
+        isImage: newMessage.isImage,
+        fileUrl: newMessage.fileUrl,
         text: newMessage.text,
         sender: newMessage.sender,
         time: newMessage.time
@@ -75,7 +81,26 @@ export default function ChatArea(props) {
             //display sender name also, if group message
             <div className={message.sender !== user.email? 'bubble-space' : 'bubble-space-rev'}>
                 <div className='bubble'>
-                    <div className='bubble-text'>{message.text}</div>
+
+                    {!message.isImage && 
+                    
+                      <div className='bubble-text'>{message.text}</div>
+                    }
+
+                    {
+                      message.isImage &&
+
+                      <IKImage
+                        urlEndpoint={urlEndpoint}
+                        src={message.fileUrl} //here the src comes from backend which knows the url
+                        loading="lazy"
+                        width="400"
+                        height="300"
+                      />
+
+                    }
+
+
                     <div className='time-ago'>
                         <TimeAgo
                             datetime={message.time}

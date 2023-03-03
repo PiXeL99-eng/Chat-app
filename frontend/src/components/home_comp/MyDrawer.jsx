@@ -18,8 +18,9 @@ import { useNavigate } from 'react-router-dom';
 import { logoutCall } from '../../pages/apiCalls';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'New Ping', 'Logout'];
-export default function MyDrawer() {
+const settings = ['Chats', 'Profile', 'Ping', 'Logout'];
+
+export default function MyDrawer(props) {
 
     const navigate = useNavigate()
 
@@ -39,12 +40,15 @@ export default function MyDrawer() {
         navigate('/login')
 
       }
+      else{
+        props.setMode(setting)
+      }
 
       setAnchorElUser(null);
     };
   
     return (
-      <AppBar position="static">
+      <AppBar position="static" sx={{boxShadow: 0}}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />

@@ -31,7 +31,7 @@ export default function ConvBox(props) {
     props.setConversationId(convId)
   }
 
-  console.log(allConvs)
+  // console.log(allConvs)
   
   //on click a particular conv, setActive Conv Id as required
   return (
@@ -52,7 +52,9 @@ export default function ConvBox(props) {
                     variant="body2"
                     color="text.primary"
                   >
-                    {`${conv.message}`.substring(0, 24) + ' ...'}
+                    {
+                      conv.isFile? '📷 image' : `${conv.message}`.substring(0, 24) + ' ...'
+                    }
                   </Typography>
                   <TimeAgo
                       datetime={`${conv.time}`}
