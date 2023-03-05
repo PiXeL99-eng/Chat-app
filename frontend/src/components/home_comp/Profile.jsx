@@ -1,6 +1,7 @@
 import React, {useContext} from 'react'
 import Avatar from '@mui/material/Avatar';
 import { AuthContext } from '../../contexts/AuthContext';
+import stringAvatar from './avatar_generator';
 
 export default function Profile() {
 
@@ -10,7 +11,7 @@ export default function Profile() {
     <>
 
       <div className='profile-img-div'>
-        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"   sx={{ width: 150, height: 150 }}/>
+        <Avatar {...stringAvatar(`${user.username}`)} className="profile-avatar"/>
       </div>
 
       <div>

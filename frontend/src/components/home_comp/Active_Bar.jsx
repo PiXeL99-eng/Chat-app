@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
 import {fetchReceiver} from "../../pages/apiCalls"
 import { AuthContext } from '../../contexts/AuthContext';
+import stringAvatar from './avatar_generator';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -58,10 +59,10 @@ export default function ActiveBar(props) {
   }, [props.conversationId])
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{backgroundColor: "#202c33"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Avatar {...stringAvatar(`${receiver}`)} />
           <Typography
             variant="h5"
             noWrap

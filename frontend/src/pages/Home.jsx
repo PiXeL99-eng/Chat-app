@@ -46,7 +46,7 @@ export default function Home() {
                 <>
                     <div className="home-page">
                         <Grid container spacing={0}>
-                            <Grid item xs={4} sx={{backgroundColor: "#141414"}}>
+                            <Grid item xs={4} sx={{backgroundColor: "#111b21"}}>
                                     <LeftContainer conversationId={conversationId} setConversationId={setConversationId} />
                             </Grid>
                             <Grid item xs={8}>

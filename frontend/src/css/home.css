@@ -4,8 +4,9 @@
 }
 
 .right-container{
-    background-color: rgb(245 239 206);
     height: 100vh;
+    background-color: #0f161e;
+    position: relative;
 }
 .bubble{
     max-width: 50%;
@@ -37,18 +38,24 @@
 .bubble-space{
     display: flex;
     flex-direction: row;
+    background: transparent;
+    position: relative;
+    z-index: 2;
 }
 
 .bubble-space-rev{
     display: flex;
     flex-direction: row-reverse;
+    background: transparent;
+    position: relative;
+    z-index: 2;
 }
 
 .chat-area{
-    height: 79vh;
+    height:  80%;
     padding: 1px 20px;
-    background-color: #daffe9;
     overflow-y: scroll;
+    background: transparent;
 }
 
 .short-info{
@@ -57,7 +64,11 @@
 }
 
 .time-ago{
-    color: white;
+    color: #ababab;
+}
+
+.photo-icon{
+    color: rgb(202 202 202);
 }
 
 .profile-img-div{
@@ -91,7 +102,7 @@
 
 .message-sender{
     font-size: 14px;
-    color: rgb(246 236 78);
+    color: rgb(15 193 255);
     margin-bottom: 6px;
 }
 .available-users{
@@ -116,4 +127,25 @@
 }
 .drawer-menu{
     background-color: #3d4144;
+}
+
+.chat-background{
+    width: 96%;
+    z-index: 1;
+    position: absolute;
+    right: 29px;
+    top: 80px;
+}
+
+.send-button{
+    background-color: #2a3942 !important;
+}
+
+.send-button:hover{
+    background-color: #465c69 !important;
+}
+
+.profile-avatar{
+    width: 120px !important;
+    height: 120px !important;
 }

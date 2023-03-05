@@ -16,6 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { logoutCall } from '../../pages/apiCalls';
+import stringAvatar from './avatar_generator';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Chats', 'Profile', 'New Ping', 'Logout'];
@@ -40,6 +41,9 @@ export default function MyDrawer(props) {
         navigate('/login')
 
       }
+      else if(setting === ''){
+        props.setMode(props.mode)
+      }
       else{
         props.setMode(setting)
       }
@@ -49,9 +53,9 @@ export default function MyDrawer(props) {
   
     return (
       <AppBar position="static" sx={{boxShadow: 0}}>
-        <Container maxWidth="xl" sx={{backgroundColor: "#3d4144"}}>
+        <Container maxWidth="xl" sx={{backgroundColor: "#202c33"}}>
           <Toolbar disableGutters>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Avatar {...stringAvatar(`${user.username}`)} />
             <Typography
               variant="h5"
               noWrap
@@ -96,7 +100,7 @@ export default function MyDrawer(props) {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
+                onClose={() => handleCloseUserMenu('')}
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>

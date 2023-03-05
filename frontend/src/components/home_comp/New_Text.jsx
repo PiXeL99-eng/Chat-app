@@ -108,7 +108,8 @@ export default function NewText(props) {
           display: 'flex',
           alignItems: 'center',
           // justifyContent: 'center',
-          '& .MuiTextField-root': { m: 1, width: 850, maxWidth: '100%' },
+          '& .MuiTextField-root': { m: 1, width: 850, maxWidth: '100%'},
+          backgroundColor: "#202c33"
         }}
         noValidate
         autoComplete="off"
@@ -123,14 +124,16 @@ export default function NewText(props) {
             onChange={(event) => {
               setNewText(event.target.value);
             }}
+            sx={{backgroundColor: "#2a3942"}}
+            color="secondary"
           />
-
+{/* rgb(255 255 255 / 80%); */}
           <IKContext 
             publicKey={publicKey} 
             urlEndpoint={urlEndpoint} 
             authenticationEndpoint={authenticationEndpoint} 
           >
-            <IconButton color="primary" aria-label="upload picture" component="label" 
+            <IconButton aria-label="upload picture" component="label" 
             sx={{
               mr: 1
             }}>
@@ -140,11 +143,11 @@ export default function NewText(props) {
                 onSuccess={onSuccess}
                 hidden
               />
-              <PhotoCamera />
+              <PhotoCamera className='photo-icon'/>
             </IconButton>
           </IKContext>
 
-          <Button size='24px' variant="contained" endIcon={<SendIcon/>} type="submit">
+          <Button size='24px' variant="contained" endIcon={<SendIcon/>} type="submit" className='send-button'>
             Send
           </Button>
       </Box>

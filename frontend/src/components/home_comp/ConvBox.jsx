@@ -9,6 +9,7 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import {fetchAllConvs} from "../../pages/apiCalls"
 import { AuthContext } from '../../contexts/AuthContext';
+import stringAvatar from './avatar_generator';
 
 export default function ConvBox(props) {
 
@@ -35,15 +36,15 @@ export default function ConvBox(props) {
   
   //on click a particular conv, setActive Conv Id as required
   return (
-    <List sx={{ width: '100%', overflowY: 'scroll', height: '77vh'}}>
+    <List sx={{ width: '100%', overflowY: 'scroll', height: '88vh'}}>
       {allConvs.map(conv => 
         <>
           <ListItem alignItems="flex-start" sx={{cursor: 'pointer', color: "white"}} onClick={() => handleClick(conv.conversationId)}>
             <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+              <Avatar {...stringAvatar(`${conv.name}`)} />
             </ListItemAvatar>
             <ListItemText
-              primary={`${conv.name}`}
+              primary={<span> {conv.name} </span>}
               secondary={
                 <span className='short-info'>
                   <Typography
@@ -67,7 +68,8 @@ export default function ConvBox(props) {
               }
             />
           </ListItem>
-          <Divider variant="inset" component="li" />
+          <Divider variant="inset" component="li" sx={{borderColor: "rgb(255 255 255 / 32%)"}}/>
+    
         </>
       )}
 

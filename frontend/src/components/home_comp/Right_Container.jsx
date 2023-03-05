@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import ActiveBar from './Active_Bar'
 import ChatArea from './Chat_Area'
 import NewText from './New_Text'
+import { background } from '../../assets'
 
 export default function RightContainer(props) {
 
@@ -9,6 +10,7 @@ export default function RightContainer(props) {
 
   return (
     <div className='right-container'>
+      <img src={background} className="chat-background"></img>
         {props.conversationId &&
         
           <>
