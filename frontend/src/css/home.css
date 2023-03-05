@@ -56,6 +56,10 @@
     justify-content: space-between;
 }
 
+.time-ago{
+    color: white;
+}
+
 .profile-img-div{
     display: flex;
     justify-content: center;
@@ -83,4 +87,33 @@
     font-family: 'Roboto';
     border-radius: 10px;
     border: 3px solid #4685e4;
+}
+
+.message-sender{
+    font-size: 14px;
+    color: rgb(246 236 78);
+    margin-bottom: 6px;
+}
+.available-users{
+    position: relative;
+}
+
+.css-tlc64q-MuiPaper-root-MuiDialog-paper{
+    position: absolute !important;
+    left: 33px !important;
+    margin: 0 !important;
+    max-width: 28% !important;
+}
+
+.drawer-button{
+    color: #3a95f3;
+}
+
+.drawer-settings{
+    color: #2963ff;
+    font-size: 17px;
+    font-weight: 500;
+}
+.drawer-menu{
+    background-color: #3d4144;
 }

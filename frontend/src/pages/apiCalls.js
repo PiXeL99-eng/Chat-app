@@ -38,6 +38,36 @@ export const newconvo = async (details) => {
     }
 }
 
+export const newGroup = async (peers, selected, groupName, user) => {
+
+    try{
+        const members = [{email: user.email, username: user.username}]
+
+        for(let i=0; i<peers.length; i++){
+            if(selected[i]){
+                members.push({email: peers[i].email, username: peers[i].username})
+            }
+        }
+
+        if(members.length === 1){
+            return null
+        }
+        else{
+            const details = {
+                isGroup: true,
+                groupName: groupName, 
+                members: members
+            }
+
+            const res = await axios.post("http://localhost:8800/conversations/create", details);
+            return res.data.conversationId
+        }
+
+    } catch(err){
+        console.log(err)
+    }
+}
+
 export const sendText = async (message) => {
 
     try{
@@ -59,20 +89,11 @@ export const fetchText = async (conversationId) => {
     }
 }
 
-export const fetchReceiver = async (conversationId, user_email) => {
+export const fetchReceiver = async (conversationId) => {
 
     try{
         const res = await axios.get("http://localhost:8800/conversations/receiver", { params: { conversationId: conversationId } });
-        const arr = res.data.members
-        const final = []
-        for(let i=0; i<arr.length; i++){
-
-            if(arr[i].email!==user_email){
-
-                final.push({name: arr[i].username, email: arr[i].email})
-            }
-        }
-        return final
+        return res.data
 
     } catch(err){
         console.log(err)

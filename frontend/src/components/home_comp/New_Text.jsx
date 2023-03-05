@@ -15,6 +15,10 @@ export default function NewText(props) {
   // https://ik.imagekit.io/jvig43v5se/path/to/myimage.jpg
 
   // parameters (needed for client-side upload)
+  
+    const [newText, setNewText] = useState('')
+    const unique_id = uuid();
+    const {user} = useContext(AuthContext)
 
     const urlEndpoint = 'https://ik.imagekit.io/jvig43v5se/chat-app';
     const publicKey = 'public_ZqWgfTsAwdmdzdldrdRVfrEsMIg='; 
@@ -37,12 +41,11 @@ export default function NewText(props) {
         time: `${Date.now()}`
       }])
 
-      const data = await fetchReceiver(props.conversationId, user.email)        //get all members of this conversation
-      const receiverEmail = data[0].email       //get all members of this conversation
+      const data = await fetchReceiver(props.conversationId)        //get all members of this conversation
 
       props.socket?.current.emit("sendMessage", {
         senderEmail: user.email,
-        receiverEmail: receiverEmail,
+        receivers: data.members,
         isImage: true,
         text: newText,
         fileUrl: fileUrl,
@@ -55,11 +58,6 @@ export default function NewText(props) {
       setNewText('')
     };
 
-    const [newText, setNewText] = useState('')
-    const unique_id = uuid();
-    // const [file, setFile] = useState(null)
-
-    const {user} = useContext(AuthContext)
     
     async function handleSubmit(event){
       event.preventDefault();
@@ -73,12 +71,11 @@ export default function NewText(props) {
         time: `${Date.now()}`
       }])
 
-      const data = await fetchReceiver(props.conversationId, user.email)        //get all members of this conversation
-      const receiverEmail = data[0].email       //get all members of this conversation
+      const data = await fetchReceiver(props.conversationId)        //get all members of this conversation
 
       props.socket?.current.emit("sendMessage", {
         senderEmail: user.email,
-        receiverEmail: receiverEmail,
+        receivers: data.members,
         isImage: false,
         text: newText,
         fileUrl: '',

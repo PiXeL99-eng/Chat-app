@@ -6,7 +6,7 @@ import Ping from './Ping'
 
 export default function LeftContainer(props) {
 
-  const [mode, setMode] = useState('Profile')
+  const [mode, setMode] = useState('Chats')
 
   return (
     <div className='left-container'>
@@ -22,7 +22,7 @@ export default function LeftContainer(props) {
             <Profile/>
         }
         {
-          mode === 'Ping' &&
+          mode === 'New Ping' &&
 
             <Ping conversationId={props.conversationId} setConversationId={props.setConversationId} mode setMode/>
         }

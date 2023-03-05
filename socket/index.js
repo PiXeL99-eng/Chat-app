@@ -18,9 +18,21 @@ function removeUser(socketId) {
     users = users.filter((user) => user.socketId !== socketId)
 }
 
-function getUser(email) {
+function getUser(receivers, sender) {
 
-    return users.find((user) => user.email === email)
+    let result = []
+
+    users.forEach((user) => {
+
+        receivers.forEach((receiver) => {
+
+            if(user.email === receiver.email && user.email !== sender){
+                result.push({email: user.email, socketId: user.socketId})
+            }
+        }) 
+    })
+
+    return result
 
 }
 
@@ -37,19 +49,27 @@ io.on("connection", (socket) => {
     })
     
     //send message
-    socket.on("sendMessage", ({senderEmail, receiverEmail, text, conversationId, isImage, fileUrl}) => {
+    socket.on("sendMessage", ({senderEmail, receivers, name, text, conversationId, isImage, fileUrl}) => {
 
-        const receiver = getUser(receiverEmail)
+        const receiver_sockets = getUser(receivers, senderEmail)
         // console.log(users, receiverEmail, receiver, senderEmail, text, conversationId)
-        
-        receiver && 
-            io.to(receiver.socketId).emit("getMessage", {
-                isImage: isImage,
-                fileUrl: fileUrl,
-                sender: senderEmail,
-                text: text,
-                conversationId: conversationId
-            })
+
+        if(receiver_sockets.length > 0){
+
+            for(let i=0; i<receiver_sockets.length; i++){
+
+                let rec = receiver_sockets[i]
+                io.to(rec.socketId).emit("getMessage", {
+                    isImage: isImage,
+                    fileUrl: fileUrl,
+                    sender: senderEmail,
+                    text: text,
+                    conversationId: conversationId,
+                    name: name
+                })
+
+            }
+        }
     })
 
     //disconnect user

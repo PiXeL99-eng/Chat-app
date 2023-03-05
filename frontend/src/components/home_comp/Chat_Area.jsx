@@ -34,7 +34,7 @@ export default function ChatArea(props) {
       data.conversationId === props.conversationId &&
 
         setNewMessage({
-            sender: data.sender,
+            name: data.name,
             isImage: data.isImage,
             fileUrl: data.fileUrl,
             text: data.text,
@@ -54,7 +54,7 @@ export default function ChatArea(props) {
         isImage: newMessage.isImage,
         fileUrl: newMessage.fileUrl,
         text: newMessage.text,
-        sender: newMessage.sender,
+        name: newMessage.name,
         time: newMessage.time
     }])
 
@@ -81,6 +81,14 @@ export default function ChatArea(props) {
             //display sender name also, if group message
             <div className={message.sender !== user.email? 'bubble-space' : 'bubble-space-rev'}>
                 <div className='bubble'>
+
+                    {
+                      message.sender !== user.email &&
+
+                        <div className='message-sender'> 
+                          { message.name }
+                        </div>
+                    }
 
                     {!message.isImage && 
                     

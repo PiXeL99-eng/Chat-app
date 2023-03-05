@@ -21,7 +21,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 export default function ActiveBar(props) {
     
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [receiver, setReceiver] = useState([])
+  const [receiver, setReceiver] = useState('')
   const {user} = useContext(AuthContext)
 
   const handleOpenUserMenu = (event) => {
@@ -37,9 +37,20 @@ export default function ActiveBar(props) {
 
     const func_fetch_receiver = async () => {
 
-      const data = await fetchReceiver(props.conversationId, user.email)
+      const data = await fetchReceiver(props.conversationId)
       // const data = await fetchText('63fc5dd9eec9dcf6ded271ac')
-      setReceiver(data)
+
+      if(data.isGroup){
+        setReceiver(data.groupName)
+      }
+      else{
+        if(data.members[0].email === user.email){
+          setReceiver(data.members[1].username)
+        }
+        else{
+          setReceiver(data.members[0].username)
+        }
+      }
     }
 
     func_fetch_receiver()
@@ -67,7 +78,8 @@ export default function ActiveBar(props) {
               textDecoration: 'none',
             }}
           >
-            {receiver.map((receiver) => <span>{receiver.name} </span>)}
+            {receiver}
+            
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

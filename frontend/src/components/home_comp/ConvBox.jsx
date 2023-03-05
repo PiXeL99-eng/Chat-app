@@ -25,7 +25,7 @@ export default function ConvBox(props) {
 
     func_fetch_convs()
 
-  }, [])
+  }, [props.conversationId])
 
   function handleClick(convId) {
     props.setConversationId(convId)
@@ -35,10 +35,10 @@ export default function ConvBox(props) {
   
   //on click a particular conv, setActive Conv Id as required
   return (
-    <List sx={{ width: '100%', bgcolor: 'background.paper', overflowY: 'scroll', height: '77vh'}}>
+    <List sx={{ width: '100%', overflowY: 'scroll', height: '77vh'}}>
       {allConvs.map(conv => 
         <>
-          <ListItem alignItems="flex-start" sx={{cursor: 'pointer'}} onClick={() => handleClick(conv.conversationId)}>
+          <ListItem alignItems="flex-start" sx={{cursor: 'pointer', color: "white"}} onClick={() => handleClick(conv.conversationId)}>
             <ListItemAvatar>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
             </ListItemAvatar>
@@ -47,19 +47,22 @@ export default function ConvBox(props) {
               secondary={
                 <span className='short-info'>
                   <Typography
-                    sx={{ display: 'inline'}}
+                    sx={{ display: 'inline', color: "white"}}
                     component="span"
                     variant="body2"
                     color="text.primary"
                   >
                     {
-                      conv.isFile? '📷 image' : `${conv.message}`.substring(0, 24) + ' ...'
+                      conv.isImage? '📷 image' : `${conv.message}`.substring(0, 24)
                     }
                   </Typography>
-                  <TimeAgo
-                      datetime={`${conv.time}`}
-                      locale='en_IN'
-                  />
+                  <span className='time-ago'>
+                    <TimeAgo
+                        datetime={`${conv.time}`}
+                        locale='en_IN'
+                        color='white'
+                    />
+                  </span>
                 </span>
               }
             />
