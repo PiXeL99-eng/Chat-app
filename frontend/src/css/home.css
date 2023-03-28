@@ -137,6 +137,32 @@
     top: 80px;
 }
 
+.login-background{
+    width: 100%;
+}
+
+.signup-background{
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -2;
+    height: 100vh;
+}
+
+.glass-effect-signup{
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+}
+
 .send-button{
     background-color: #2a3942 !important;
 }

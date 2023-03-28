@@ -3,8 +3,8 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
+import { signup_background } from '../assets'
+import { styled } from '@mui/material/styles';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext';
 import { signUpCall } from './apiCalls';
+import { purple } from '@mui/material/colors';
 
 const theme = createTheme();
 
@@ -49,14 +50,46 @@ export default function SignUp() {
     navigate("/")       //do error handling
   };
 
+  const CssTextField = styled(TextField)({
+    '& label.Mui-focused': {
+      color: 'rgb(4,255,231)',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'white',
+    },
+    '& .MuiFormLabel-root': {
+      color: 'rgb(4,255,231)',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'white',
+        borderWidth: '2px',
+      },
+      '&:hover fieldset': {
+        borderColor: 'white',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'white',
+      },
+    },
+  });
+
+  const ColorButton = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[500],
+    '&:hover': {
+      backgroundColor: purple[700],
+    },
+  }));
+
   return (
 
     <>
 
       { !isFetching && !user &&
       
-          <ThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+          <ThemeProvider theme={theme} >
+            <Container component="main" maxWidth='xs'>
               <CssBaseline />
               <Box
                 sx={{
@@ -64,8 +97,11 @@ export default function SignUp() {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
+                  color: 'white'
                 }}
               >
+                <div className="glass-effect-signup"></div>
+                <img src={signup_background} alt="" className='signup-background'/>
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                   <LockOutlinedIcon />
                 </Avatar>
@@ -75,65 +111,78 @@ export default function SignUp() {
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
-                      <TextField
-                        autoComplete="given-name"
+                      <CssTextField
                         name="firstName"
                         required
                         fullWidth
                         id="firstName"
                         label="First Name"
                         autoFocus
+                        autoComplete="off"
+                        InputProps={{
+                          style: {
+                            color: 'white',
+                            fontWeight: '400'
+                          },
+                        }}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <TextField
+                      <CssTextField
                         required
                         fullWidth
                         id="lastName"
                         label="Last Name"
                         name="lastName"
-                        autoComplete="family-name"
+                        autoComplete="off"
+                        InputProps={{
+                          style: {
+                            color: 'white',
+                            fontWeight: '400'
+                          },
+                        }}
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField
+                      <CssTextField
                         required
                         fullWidth
                         id="email"
                         label="Email Address"
                         name="email"
-                        autoComplete="email"
+                        autoComplete="off"
+                        InputProps={{
+                          style: {
+                            color: 'white',
+                            fontWeight: '400'
+                          },
+                        }}
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField
+                      <CssTextField
                         required
                         fullWidth
                         name="password"
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="new-password"
+                        autoComplete="off"
+                        InputProps={{
+                          style: {
+                            color: 'white',
+                            fontWeight: '400'
+                          },
+                        }}
                       />
                     </Grid>
-                    {/* <Grid item xs={12}>
-                      <FormControlLabel
-                        control={<Checkbox value="allowExtraEmails" color="primary" />}
-                        label="I want to receive inspiration, marketing promotions and updates via email."
-                      />
-                    </Grid> */}
                   </Grid>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                  >
+                  <ColorButton type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2, background: 'rgb(217,87,230)' }}>
                     Sign Up
-                  </Button>
+                  </ColorButton>
                   <Grid container justifyContent="flex-end">
                     <Grid item>
-                      <Link href="#" variant="body2">
+                      <Link href="/login" variant="body2" color={'rgb(87 255 82)'}>
                         Already have an account? Log in
                       </Link>
                     </Grid>
