@@ -13,7 +13,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
-import Checkbox from '@mui/material/Checkbox';
+import { styled } from '@mui/material/styles';
 import { AuthContext } from '../../contexts/AuthContext';
 import {fetchPeers, newconvo, newGroup} from "../../pages/apiCalls"
 
@@ -75,9 +75,17 @@ export default function Ping(props) {
     setSelected(data)
   }
 
+  const ColorButton = styled(Button)(() => ({
+    color: "black",
+    backgroundColor: "rgb(1,248,153)",
+    '&:hover': {
+      backgroundColor: "rgb(12 224 142)",
+    },
+  }));
+
   return (
     <>
-        <div>
+        <div className='container-convtype'>
             <Switch
             checked={isGroup}
             onChange={(event) => setIsGroup(event.target.checked)}
@@ -90,7 +98,7 @@ export default function Ping(props) {
             !isGroup &&
                 <div className='available-users'>
                     <div>Available Users</div>
-                    <List sx={{ width: '100%', bgcolor: 'background.paper', overflowY: 'scroll', height: '77vh'}}>
+                    <List sx={{ width: '100%', overflowY: 'auto', height: '77vh'}}>
                         {peers.map(peer => 
                             <>
                             <ListItem alignItems="flex-start" sx={{cursor: 'pointer'}} onClick={() => createConvo(peer.email, peer.username)}>
@@ -102,7 +110,7 @@ export default function Ping(props) {
                                 secondary={
                                     <span className='short-info'>
                                     <Typography
-                                        sx={{ display: 'inline'}}
+                                        sx={{ display: 'inline', color: 'white'}}
                                         component="span"
                                         variant="body2"
                                         color="text.primary"
@@ -115,7 +123,7 @@ export default function Ping(props) {
                                 }
                                 />
                             </ListItem>
-                            <Divider variant="inset" component="li" />
+                            <Divider variant="inset" component="li" sx={{borderColor: "rgb(255 255 255 / 32%)"}}/>
                             </>
                         )}
 
@@ -128,7 +136,7 @@ export default function Ping(props) {
             isGroup &&
                 <div className='available-users'>
                     <div>Available Users</div>
-                    <List sx={{ width: '100%', bgcolor: 'background.paper', overflowY: 'scroll', height: '77vh'}}>
+                    <List sx={{ width: '100%', overflowY: 'auto', height: '77vh'}}>
                         {peers.map((peer, ind) => 
                             <>
                             <ListItem alignItems="flex-start">
@@ -146,7 +154,7 @@ export default function Ping(props) {
                                 secondary={
                                     <span className='short-info'>
                                     <Typography
-                                        sx={{ display: 'inline'}}
+                                        sx={{ display: 'inline', color: 'white'}}
                                         component="span"
                                         variant="body2"
                                         color="text.primary"
@@ -159,11 +167,11 @@ export default function Ping(props) {
                                 }
                                 />
                             </ListItem>
-                            <Divider variant="inset" component="li" />
+                            <Divider variant="inset" component="li" sx={{borderColor: "rgb(255 255 255 / 32%)"}}/>
                             </>
                         )}
 
-                    <Fab variant="extended" sx={{position: "absolute", bottom: 15, right: 33}} onClick={handleClickOpen}>
+                    <Fab variant="extended" sx={{position: "absolute", bottom: 15, right: 33, background: "rgb(1,248,153)"}} onClick={handleClickOpen}>
                         <NavigationIcon sx={{ mr: 1 }} />
                         Create
                     </Fab>
@@ -184,7 +192,7 @@ export default function Ping(props) {
                             />
                         </DialogContent>
                         <DialogActions>
-                        <Button onClick={createGroup}>Create</Button>
+                        <ColorButton variant="contained" onClick={createGroup}>Create</ColorButton>
                         </DialogActions>
                     </Dialog>
 

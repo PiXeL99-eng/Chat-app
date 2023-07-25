@@ -54,7 +54,7 @@
 .chat-area{
     height:  80%;
     padding: 1px 20px;
-    overflow-y: scroll;
+    overflow-y: auto;
     background: transparent;
 }
 
@@ -82,24 +82,41 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    font-size: 33px;
+    font-size: 30px;
     font-family: 'Roboto';
-    border-radius: 10px;
-    border: 3px solid #4685e4;
+    margin-top: 3rem;
+    border: 3px solid #c4c35f;
+    color: white;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
 }
 
 .profile-email{
-    width: 78%;
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    margin-top: 2rem;
-    font-size: 33px;
+    font-size: 30px;
     font-family: 'Roboto';
-    border-radius: 10px;
-    border: 3px solid #4685e4;
+    margin-top: 3rem;
+    border: 3px solid #c4c35f;
+    color: white;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
 }
 
+.container-convtype{
+    width: 34%;
+    color: #3befff;
+    font-size: 21px;
+    font-family: math;
+    margin-left: 6px;
+    margin-top: 10px;
+    background: #3f4453;
+    border-radius: 13px;
+}
 .message-sender{
     font-size: 14px;
     color: rgb(15 193 255);
@@ -107,6 +124,8 @@
 }
 .available-users{
     position: relative;
+    background: rgb(17,27,33);
+    color: white;
 }
 
 .css-tlc64q-MuiPaper-root-MuiDialog-paper{

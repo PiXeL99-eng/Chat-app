@@ -36,7 +36,7 @@ export default function ConvBox(props) {
   
   //on click a particular conv, setActive Conv Id as required
   return (
-    <List sx={{ width: '100%', overflowY: 'scroll', height: '88vh'}}>
+    <List sx={{ width: '100%', overflowY: 'auto', height: '88vh'}}>
       {allConvs.map(conv => 
         <>
           <ListItem alignItems="flex-start" sx={{cursor: 'pointer', color: "white"}} onClick={() => handleClick(conv.conversationId)}>
