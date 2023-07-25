@@ -1,6 +1,6 @@
 # Chat Application
 
-![Chat App Demo](link_to_demo_gif.gif)
+<!-- ![Chat App Demo](link_to_demo_gif.gif) -->
 This web-app allows you to engage in text messaging, group messaging, and image sharing with your friends and colleagues in real-time. The app consists of a frontend built with React.js, a WebSocket server using Socket.io and Node.js, and an API created with Node.js, MongoDB, and Express.js.
 
 ## Features
