@@ -99,6 +99,18 @@ npm start
 
 The project is organized into the following directories:
 
+
+- **frontend/**: This directory contains the frontend codebase of the chat application built with React.js. It includes all the necessary components, styles, and assets to render the user interface.
+
+- **websocket-server/**: This directory houses the WebSocket server codebase implemented using Socket.io and Node.js. It handles real-time communication between the frontend and the backend.
+
+- **api/**: The API server codebase resides in this directory. It is built using Node.js, Express.js, and MongoDB (with Mongoose) to handle user authentication, message storage, and other backend functionalities.
+
+- **public/**: This directory contains public assets, such as images and the index.html file required for the frontend.
+
+- **README.md**: The project documentation you are currently reading, providing an overview of the application and its setup instructions.
+
+
 chat-app/
 ├── frontend/ # Frontend codebase
 ├── websocket-server/ # WebSocket server codebase
