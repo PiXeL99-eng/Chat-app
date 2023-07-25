@@ -87,7 +87,7 @@ npm start
 - Frontend
   - React.js
   - Socket.io Client
-  - HTML/CSS
+  - Material UI
 
 - WebSocket and API
   - Node.js
