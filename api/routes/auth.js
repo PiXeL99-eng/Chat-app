@@ -4,6 +4,13 @@ const bcrypt = require("bcrypt");
 
 //REGISTER
 router.post("/signup", async (req, res) => {
+
+  try {
+    const existing_user = await User.findOne({ email: req.body.email });
+    existing_user && res.status(404).json("user already exists");
+  } catch (error) {
+    res.status(500).json(error)
+  }
   try {
     //generate new password
     const saltRounds = 10;

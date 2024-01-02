@@ -16,6 +16,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { styled } from '@mui/material/styles';
 import { AuthContext } from '../../contexts/AuthContext';
 import {fetchPeers, newconvo, newGroup} from "../../pages/apiCalls"
+import stringAvatar from './avatar_generator';
 
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
@@ -91,19 +92,19 @@ export default function Ping(props) {
             onChange={(event) => setIsGroup(event.target.checked)}
             inputProps={{ 'aria-label': 'controlled' }}
             />
-            <span>Make group</span>    
+            <span>Create new group</span>    
         </div>
 
         {
             !isGroup &&
                 <div className='available-users'>
-                    <div>Available Users</div>
+                    <div className='available-users-heading'>Available Users</div>
                     <List sx={{ width: '100%', overflowY: 'auto', height: '77vh'}}>
                         {peers.map(peer => 
                             <>
                             <ListItem alignItems="flex-start" sx={{cursor: 'pointer'}} onClick={() => createConvo(peer.email, peer.username)}>
                                 <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                    <Avatar {...stringAvatar(`${peer.username}`)} />
                                 </ListItemAvatar>
                                 <ListItemText
                                 primary={`${peer.username}`}
@@ -135,7 +136,7 @@ export default function Ping(props) {
         {
             isGroup &&
                 <div className='available-users'>
-                    <div>Available Users</div>
+                    <div className='available-users-heading'>Available Users</div>
                     <List sx={{ width: '100%', overflowY: 'auto', height: '77vh'}}>
                         {peers.map((peer, ind) => 
                             <>
@@ -147,7 +148,7 @@ export default function Ping(props) {
                             inputProps={{ 'aria-label': 'controlled' }}
                             /> */}
                                 <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+                                    <Avatar {...stringAvatar(`${peer.username}`)} />
                                 </ListItemAvatar>
                                 <ListItemText
                                 primary={`${peer.username}`}

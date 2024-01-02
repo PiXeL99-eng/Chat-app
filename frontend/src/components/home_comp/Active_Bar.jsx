@@ -66,8 +66,6 @@ export default function ActiveBar(props) {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
             sx={{
               ml: 2,
             //   display: { xs: 'flex', md: 'none' },
@@ -84,7 +82,8 @@ export default function ActiveBar(props) {
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu}             
+              <IconButton 
+                // onClick={handleOpenUserMenu}             Intentionally disabled... Further features can be added like: Block a user, or delete chat
                 size="large"
                 edge="start"
                 color="inherit"

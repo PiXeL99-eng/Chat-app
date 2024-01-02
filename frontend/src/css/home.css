@@ -108,7 +108,7 @@
 }
 
 .container-convtype{
-    width: 34%;
+    width: 45%;
     color: #3befff;
     font-size: 21px;
     font-family: math;
@@ -140,7 +140,7 @@
 }
 
 .drawer-settings{
-    color: #2963ff;
+    color: #d8d8d8;
     font-size: 17px;
     font-weight: 500;
 }
@@ -149,7 +149,7 @@
 }
 
 .chat-background{
-    width: 96%;
+    width: 95%;
     z-index: 1;
     position: absolute;
     right: 29px;
@@ -167,6 +167,7 @@
     left: 0px;
     z-index: -2;
     height: 100vh;
+    filter: brightness(32%);
 }
 
 .glass-effect-signup{
@@ -193,4 +194,12 @@
 .profile-avatar{
     width: 120px !important;
     height: 120px !important;
+}
+
+.available-users-heading{
+    padding-top: 17px;
+    color: #b6ffb6;
+    font-size: 20px;
+    font-family: system-ui;
+    text-align: center;
 }

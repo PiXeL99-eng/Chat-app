@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CircularProgress from '@mui/material/CircularProgress';
-import { login_background } from '../assets'
+import { login_background, chit_chat_logo_2 } from '../assets'
 import { purple } from '@mui/material/colors';
 
 import { loginCall } from './apiCalls';
@@ -117,15 +117,13 @@ export default function Login() {
                       alignItems: 'center'
                     }}
                   >
-                    <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                      <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
+                    <Avatar alt="Chit-Chat" src={chit_chat_logo_2} />
+                    <Typography component="h1" variant="h5" pt={1}>
 
-                      Log in
+                      Log in to Chit-Chat 🥂
 
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                       <CssTextField
                         margin="normal"
                         required

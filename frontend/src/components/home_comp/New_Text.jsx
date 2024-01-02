@@ -116,8 +116,9 @@ export default function NewText(props) {
       >
           <TextField
             id="outlined-multiline-static"
-            label="Type your text"
+            label="Type your message"
             multiline
+            inputProps={{ style: { color: "#ffffffc4" } }}
             fullWidth
             rows={1}
             value={newText}
@@ -125,7 +126,10 @@ export default function NewText(props) {
               setNewText(event.target.value);
             }}
             sx={{backgroundColor: "#2a3942"}}
-            color="secondary"
+            InputLabelProps={{
+              style: { color: '#ffffffc4' },
+            }}
+            color="warning"
           />
 {/* rgb(255 255 255 / 80%); */}
           <IKContext 

@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { signup_background } from '../assets'
+import { signup_background, chit_chat_logo_2 } from '../assets'
 import { styled } from '@mui/material/styles';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
@@ -102,13 +102,11 @@ export default function SignUp() {
               >
                 <div className="glass-effect-signup"></div>
                 <img src={signup_background} alt="" className='signup-background'/>
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                  <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                  Sign up
+                <Avatar alt="Chit-Chat" src={chit_chat_logo_2} />
+                <Typography component="h1" variant="h5" pt={1}>
+                  Sign up to Chit-Chat 🥂
                 </Typography>
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                       <CssTextField
@@ -118,12 +116,12 @@ export default function SignUp() {
                         id="firstName"
                         label="First Name"
                         autoFocus
-                        autoComplete="off"
-                        InputProps={{
+                        autoComplete='off'
+                        inputProps={{
                           style: {
                             color: 'white',
                             fontWeight: '400'
-                          },
+                          }
                         }}
                       />
                     </Grid>
@@ -182,7 +180,7 @@ export default function SignUp() {
                   </ColorButton>
                   <Grid container justifyContent="flex-end">
                     <Grid item>
-                      <Link href="/login" variant="body2" color={'rgb(87 255 82)'}>
+                      <Link href="/login" variant="body2" color={'#ff65ff'}>
                         Already have an account? Log in
                       </Link>
                     </Grid>

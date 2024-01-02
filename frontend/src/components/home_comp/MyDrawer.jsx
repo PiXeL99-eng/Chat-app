@@ -16,7 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { logoutCall } from '../../pages/apiCalls';
-import stringAvatar from './avatar_generator';
+import { chit_chat_logo_2 } from '../../assets/index'
+// import stringAvatar from './avatar_generator';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Chats', 'Profile', 'New Ping', 'Logout'];
@@ -55,7 +56,7 @@ export default function MyDrawer(props) {
       <AppBar position="static" sx={{boxShadow: 0}}>
         <Container maxWidth="xl" sx={{backgroundColor: "#202c33"}}>
           <Toolbar disableGutters>
-            <Avatar {...stringAvatar(`${user.username}`)} />
+            <Avatar alt="Chit-Chat" src={chit_chat_logo_2} />
             <Typography
               variant="h5"
               noWrap
@@ -71,8 +72,8 @@ export default function MyDrawer(props) {
                 textDecoration: 'none',
               }}
             >
-              {user.username}
-              {/* PingPop */}
+              {/* {user.username} */}
+              Chit-Chat
             </Typography>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
@@ -87,7 +88,9 @@ export default function MyDrawer(props) {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: '45px'}}
+                sx={{ mt: '45px', 
+                      "& .MuiMenu-paper": { backgroundColor: "#2a3942" } 
+                    }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
