@@ -15,13 +15,13 @@ import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import { styled } from '@mui/material/styles';
 import { AuthContext } from '../../contexts/AuthContext';
-import {fetchPeers, newconvo, newGroup} from "../../pages/apiCalls"
-import stringAvatar from './avatar_generator';
+import {fetchPeers, newconvo, newGroup} from "../../pages_and_api/apiCalls"
+import stringAvatar from '../avatar_generator';
 
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
 
-export default function Ping(props) {
+export default function NewPing(props) {
 
   const [isGroup, setIsGroup] = useState(false);
   const [groupName, setGroupName] = useState('');

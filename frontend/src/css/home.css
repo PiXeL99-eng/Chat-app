@@ -203,3 +203,10 @@
     font-family: system-ui;
     text-align: center;
 }
+
+.no-convs{
+    color: white;
+    padding-left: 22px;
+    font-size: 19px;
+    padding-top: 14px;
+}

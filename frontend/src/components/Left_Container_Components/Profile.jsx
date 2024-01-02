@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
 import Avatar from '@mui/material/Avatar';
 import { AuthContext } from '../../contexts/AuthContext';
-import stringAvatar from './avatar_generator';
+import stringAvatar from '../avatar_generator';
 
 export default function Profile() {
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,10 +16,28 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext';
 import { signUpCall } from './apiCalls';
 import { purple } from '@mui/material/colors';
+import Modal from '@mui/material/Modal';
+import Alert from '@mui/material/Alert';
+
+const style = {
+  position: 'absolute',
+  top: '10%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  p: 1,
+  borderRadius: '9px'
+};
 
 const theme = createTheme();
 
 export default function SignUp() {
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const error_message = useRef(null)
 
   const navigate = useNavigate();
   const {user, isFetching, error, dispatch} = useContext(AuthContext)
@@ -43,11 +61,16 @@ export default function SignUp() {
     const password = data.get('password')
     const username = data.get('firstName') + ' ' + data.get('lastName')
 
-    await signUpCall({email: email, password: password, username: username}, dispatch)
+    error_message.current = await signUpCall({email: email, password: password, username: username}, dispatch)
 
-    console.log(user)
-
-    navigate("/")       //do error handling
+    if (error_message.current){
+      handleOpen()
+      console.log(error_message.current)
+    }
+    else{
+      console.log(user)
+      navigate("/")       
+    }
   };
 
   const CssTextField = styled(TextField)({
@@ -85,6 +108,19 @@ export default function SignUp() {
   return (
 
     <>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Alert severity="error">{error_message.current}</Alert>
+          </Typography>
+        </Box>
+      </Modal>
 
       { !isFetching && !user &&
       

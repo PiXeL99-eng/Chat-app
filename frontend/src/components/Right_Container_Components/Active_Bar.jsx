@@ -12,9 +12,9 @@ import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 // import AdbIcon from '@mui/icons-material/Adb';
-import {fetchReceiver} from "../../pages/apiCalls"
+import {fetchReceiver} from "../../pages_and_api/apiCalls"
 import { AuthContext } from '../../contexts/AuthContext';
-import stringAvatar from './avatar_generator';
+import stringAvatar from '../avatar_generator';
 
 // const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];

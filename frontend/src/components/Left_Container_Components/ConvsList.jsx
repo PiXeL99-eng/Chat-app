@@ -7,11 +7,11 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import {fetchAllConvs} from "../../pages/apiCalls"
+import {fetchAllConvs} from "../../pages_and_api/apiCalls"
 import { AuthContext } from '../../contexts/AuthContext';
-import stringAvatar from './avatar_generator';
+import stringAvatar from '../avatar_generator';
 
-export default function ConvBox(props) {
+export default function ConvsList(props) {
 
   const [allConvs, setAllConvs] = useState([])
   const {user} = useContext(AuthContext)
@@ -77,7 +77,7 @@ export default function ConvBox(props) {
 
         allConvs.length === 0 &&
 
-          <div>
+          <div className='no-convs'>
             No conversations found. Open a new one!
           </div>
       }

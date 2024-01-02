@@ -1,8 +1,5 @@
 import React, {useState} from 'react'
-import MyDrawer from './MyDrawer'
-import ConvBox from './ConvBox'
-import Profile from './Profile'
-import Ping from './Ping'
+import { MyDrawer, NewPing, ConvsList, Profile } from './Left_Container_Components'
 
 export default function LeftContainer(props) {
 
@@ -14,7 +11,7 @@ export default function LeftContainer(props) {
 
         {
           mode === 'Chats' &&
-            <ConvBox conversationId={props.conversationId} setConversationId={props.setConversationId}/>
+            <ConvsList conversationId={props.conversationId} setConversationId={props.setConversationId}/>
         }
         {
           mode === 'Profile' &&
@@ -24,7 +21,7 @@ export default function LeftContainer(props) {
         {
           mode === 'New Ping' &&
 
-            <Ping conversationId={props.conversationId} setConversationId={props.setConversationId} mode setMode/>
+            <NewPing conversationId={props.conversationId} setConversationId={props.setConversationId} mode setMode/>
         }
     </div>
   )

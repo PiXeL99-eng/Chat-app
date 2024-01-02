@@ -5,7 +5,16 @@ export const loginCall = async (userCredential, dispatch) => {
 
     try{
         const res = await axios.post("http://localhost:8800/auth/login", userCredential);
-        dispatch({type: "LOGIN_SUCCESS", payload: res.data})
+
+        if ('error' in res.data){
+            dispatch({type: "LOGIN_FAILURE", payload: res.data})
+            return res.data.error
+        }
+        else{
+            dispatch({type: "LOGIN_SUCCESS", payload: res.data})
+            return null
+        }
+
     } catch(err){
         dispatch({type: "LOGIN_FAILURE", payload: err})
     }
@@ -16,9 +25,18 @@ export const signUpCall = async (userCredential, dispatch) => {
 
     try{
         const res = await axios.post("http://localhost:8800/auth/signup", userCredential);
-        dispatch({type: "SIGNUP_SUCCESS", payload: res.data})
+
+        if ('error' in res.data){
+            dispatch({type: "SIGNUP_FAILURE", payload: res.data})
+            return res.data.error
+        }
+        else{
+            dispatch({type: "SIGNUP_SUCCESS", payload: res.data})
+            return null
+        }
     } catch(err){
         dispatch({type: "SIGNUP_FAILURE", payload: err})
+        return err
     }
 }
 

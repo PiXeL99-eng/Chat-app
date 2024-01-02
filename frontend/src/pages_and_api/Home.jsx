@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState, useRef} from "react";
-import {LeftContainer, RightContainer} from "../components/home_comp";
+import {LeftContainer, RightContainer} from "../components";
 
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from '../contexts/AuthContext';

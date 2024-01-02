@@ -6,8 +6,8 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { sendText } from '../../pages/apiCalls';
-import {fetchReceiver} from "../../pages/apiCalls"
+import { sendText } from '../../pages_and_api/apiCalls';
+import {fetchReceiver} from "../../pages_and_api/apiCalls"
 import { AuthContext } from '../../contexts/AuthContext';
 import { v4 as uuid } from 'uuid';
 
@@ -81,11 +81,9 @@ export default function NewText(props) {
         fileUrl: '',
         conversationId: props.conversationId,
         name: user.username
-        // conversationId: '63fc5dd9eec9dcf6ded271ac'
       })
 
       await sendText({isImage: false, fileUrl: '', text: newText, sender: user.email, name: user.username, conversationId: props.conversationId, time: `${Date.now()}`})
-      // await sendText({text: newText, sender: 'sayan@gmail.com', conversationId: '63fc5dd9eec9dcf6ded271ac', time: `${Date.now()}`})
 
       setNewText('')
     }

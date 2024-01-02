@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react'
 import TimeAgo from 'timeago-react';
-import { fetchText } from '../../pages/apiCalls';
+import { fetchText } from '../../pages_and_api/apiCalls';
 import { AuthContext } from '../../contexts/AuthContext';
 import { IKImage } from 'imagekitio-react';
 
@@ -16,7 +16,6 @@ export default function ChatArea(props) {
     const func_fetch_text = async () => {
 
         const data = await fetchText(props.conversationId)
-        // const data = await fetchText('63fc5dd9eec9dcf6ded271ac')
         props.setMessages(data)
     }
 

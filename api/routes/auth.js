@@ -7,10 +7,16 @@ router.post("/signup", async (req, res) => {
 
   try {
     const existing_user = await User.findOne({ email: req.body.email });
-    existing_user && res.status(404).json("user already exists");
+
+    if (existing_user){
+      res.status(200).json({error: "user already exists"});       // if user with same email exists already, don't allow signup
+      return
+    }
   } catch (error) {
     res.status(500).json(error)
+    return
   }
+
   try {
     //generate new password
     const saltRounds = 10;
@@ -27,9 +33,11 @@ router.post("/signup", async (req, res) => {
     //save user and respond
     const user = await newUser.save();
     res.status(200).json(user);
+    return
   } catch (err) {
     console.log("works")
     res.status(500).json(err)
+    return
   }
 });
 
@@ -37,14 +45,25 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(404).json("user not found");
+
+    if (!user){
+      res.status(200).json({error: "user not found"});
+      return
+    }
 
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    !validPassword && res.status(400).json("wrong password")
+
+    if (!validPassword){
+      res.status(200).json({error: "wrong password"})
+      return
+    }
 
     res.status(200).json(user)
+    return
+
   } catch (err) {
     res.status(500).json(err)
+    return
   }
 });
 

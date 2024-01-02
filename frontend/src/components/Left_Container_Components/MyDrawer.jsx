@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 // import {fetchReceiver} from "../../pages/apiCalls"
 import { AuthContext } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { logoutCall } from '../../pages/apiCalls';
+import { logoutCall } from '../../pages_and_api/apiCalls';
 import { chit_chat_logo_2 } from '../../assets/index'
 // import stringAvatar from './avatar_generator';
 

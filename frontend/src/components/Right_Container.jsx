@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
-import ActiveBar from './Active_Bar'
-import ChatArea from './Chat_Area'
-import NewText from './New_Text'
-import { background } from '../../assets'
+import { ActiveBar, ChatArea, NewText } from './Right_Container_Components'
+import { background } from '../assets'
 
 export default function RightContainer(props) {
 
