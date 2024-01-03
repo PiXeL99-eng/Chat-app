@@ -79,3 +79,5 @@ io.on("connection", (socket) => {
         io.emit("getUsers", users)
     })
 })
+
+console.log(`Socket server is running at port 8900!`);

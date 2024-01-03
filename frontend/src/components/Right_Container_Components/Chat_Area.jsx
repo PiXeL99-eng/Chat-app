@@ -9,7 +9,7 @@ export default function ChatArea(props) {
   const {user} = useContext(AuthContext)
   const [newMessage, setNewMessage ] = useState(null)
   const messagesEndRef = useRef(null)
-  const urlEndpoint = 'https://ik.imagekit.io/jvig43v5se/chat-app';
+  const urlEndpoint = `${process.env.REACT_APP_URL_ENDPOINT}`;
 
   useEffect(() => {
 
@@ -74,8 +74,6 @@ export default function ChatArea(props) {
     <div className='chat-area'>
 
         {props.messages.map(message => 
-
-            // <div className={message.sender !== 'sayan@gmail.com'? 'bubble-space' : 'bubble-space-rev'}>
             
             //display sender name also, if group message
             <div className={message.sender !== user.email? 'bubble-space' : 'bubble-space-rev'}>

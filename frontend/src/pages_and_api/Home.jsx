@@ -13,9 +13,8 @@ export default function Home() {
 
     const navigate = useNavigate();
     const {user, isFetching, error, dispatch} = useContext(AuthContext)
-    // const [conversationId, setConversationId] = useState('63fe2f70abe85ccff93d50ce')        //set null initially
     const [conversationId, setConversationId] = useState(null)        //set null initially
-    const socket = useRef(io("ws://localhost:8900"))
+    const socket = useRef(io(`${process.env.REACT_APP_SOCKET_URL}`))
 
     useEffect(() => {
 

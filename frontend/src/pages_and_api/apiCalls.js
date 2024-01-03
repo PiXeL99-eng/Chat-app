@@ -4,7 +4,7 @@ export const loginCall = async (userCredential, dispatch) => {
     dispatch({type: "LOGIN_START"});
 
     try{
-        const res = await axios.post("http://localhost:8800/auth/login", userCredential);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, userCredential);
 
         if ('error' in res.data){
             dispatch({type: "LOGIN_FAILURE", payload: res.data})
@@ -24,7 +24,7 @@ export const signUpCall = async (userCredential, dispatch) => {
     dispatch({type: "SIGNUP_START"});
 
     try{
-        const res = await axios.post("http://localhost:8800/auth/signup", userCredential);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, userCredential);
 
         if ('error' in res.data){
             dispatch({type: "SIGNUP_FAILURE", payload: res.data})
@@ -48,7 +48,7 @@ export const logoutCall = (dispatch) => {
 export const newconvo = async (details) => {
 
     try{
-        const res = await axios.post("http://localhost:8800/conversations/create", details);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/conversations/create`, details);
         return res.data.conversationId
 
     } catch(err){
@@ -77,7 +77,7 @@ export const newGroup = async (peers, selected, groupName, user) => {
                 members: members
             }
 
-            const res = await axios.post("http://localhost:8800/conversations/create", details);
+            const res = await axios.post(`${process.env.REACT_APP_API_URL}/conversations/create`, details);
             return res.data.conversationId
         }
 
@@ -89,7 +89,7 @@ export const newGroup = async (peers, selected, groupName, user) => {
 export const sendText = async (message) => {
 
     try{
-        const res = await axios.post("http://localhost:8800/conversations/message", message);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/conversations/message`, message);
     } catch(err){
         console.log(err)
     }
@@ -99,7 +99,7 @@ export const sendText = async (message) => {
 export const fetchText = async (conversationId) => {
 
     try{
-        const res = await axios.get("http://localhost:8800/conversations/conversation", { params: { conversationId: conversationId } });
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/conversations/conversation`, { params: { conversationId: conversationId } });
         return res.data.messages
     } catch(err){
         console.log(err)
@@ -110,7 +110,7 @@ export const fetchText = async (conversationId) => {
 export const fetchReceiver = async (conversationId) => {
 
     try{
-        const res = await axios.get("http://localhost:8800/conversations/receiver", { params: { conversationId: conversationId } });
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/conversations/receiver`, { params: { conversationId: conversationId } });
         return res.data
 
     } catch(err){
@@ -122,7 +122,7 @@ export const fetchReceiver = async (conversationId) => {
 export const fetchAllConvs = async (email) => {
 
     try{
-        const res = await axios.get("http://localhost:8800/conversations/allConvs", { params: { email: email } });
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/conversations/allConvs`, { params: { email: email } });
         return res.data.convs
 
     } catch(err){
@@ -134,7 +134,7 @@ export const fetchAllConvs = async (email) => {
 export const fetchPeers = async (email) => {
 
     try{
-        const res = await axios.get("http://localhost:8800/users/peers", { params: { email: email } });
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/users/peers`, { params: { email: email } });
         return res.data.peers
 
     } catch(err){

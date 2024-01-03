@@ -12,7 +12,6 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { v4 as uuid } from 'uuid';
 
 export default function NewText(props) {
-  // https://ik.imagekit.io/jvig43v5se/path/to/myimage.jpg
 
   // parameters (needed for client-side upload)
   
@@ -20,9 +19,9 @@ export default function NewText(props) {
     const unique_id = uuid();
     const {user} = useContext(AuthContext)
 
-    const urlEndpoint = 'https://ik.imagekit.io/jvig43v5se/chat-app';
-    const publicKey = 'public_ZqWgfTsAwdmdzdldrdRVfrEsMIg='; 
-    const authenticationEndpoint = 'http://localhost:8800/conversations/img_auth';
+    const urlEndpoint = `${process.env.REACT_APP_URL_ENDPOINT}`;
+    const publicKey = `${process.env.REACT_APP_PUBLIC_KEY}`; 
+    const authenticationEndpoint = `${process.env.REACT_APP_API_URL}/conversations/img_auth`;
 
     const onError = err => {
       console.log("Error", err);
@@ -51,7 +50,6 @@ export default function NewText(props) {
         fileUrl: fileUrl,
         conversationId: props.conversationId,
         name: user.username
-        // conversationId: '63fc5dd9eec9dcf6ded271ac'
       })
 
       await sendText({isImage: true, fileUrl: fileUrl, text: newText, sender: user.email, name: user.username, conversationId: props.conversationId, time: `${Date.now()}`})
