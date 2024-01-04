@@ -12,7 +12,7 @@ Chit-Chat is a web-app that allows you to engage in text messaging, group messag
 
 ## Demo
 
-To see the app in action, check out our live demo [here](https://chat-app-flame-three.vercel.app/){:target="_blank"}.
+To see the app in action, check out our live demo <a href="https://chat-app-flame-three.vercel.app/" target="_blank">here</a>
 
 The API and Socket Server is deployed on Render.
 The Frontend is deployed on Vercel.
