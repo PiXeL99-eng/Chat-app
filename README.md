@@ -12,7 +12,7 @@ Chit-Chat is a web-app that allows you to engage in text messaging, group messag
 
 ## Demo
 
-To see the app in action, check out our live demo [here](https://chat-app-flame-three.vercel.app/).
+To see the app in action, check out our live demo [here](https://chat-app-flame-three.vercel.app/){:target="_blank"}.
 
 The API and Socket Server is deployed on Render.
 The Frontend is deployed on Vercel.
@@ -49,7 +49,7 @@ cd ../api
 npm install
 ```
 
-5. Configure MongoDB and ImageKit:
+5. Configure MongoDB and ImageKit for the API:
 
     Make sure you have MongoDB installed and running on your machine.
     Create an account on Image Kit and get your accesss keys.
@@ -62,7 +62,21 @@ IMAGEKIT_PRIVATE_KEY = your_image_kit_private_key
 IMAGEKIT_URL_ENDPOINT = your_image_kit_url_endpoint
 ```
 
-6. Start the API, frontend and WebSocket server
+
+6. Configure ImageKit, API url and Socket Server on Frontend:
+
+    Get the public key and URL endpoint of your ImageKit account.
+    Note the localhost address at which your Socket Server and API is running.
+    Create a .env file in the frontend directory and provide the necessary environment variables:
+
+```bash
+REACT_APP_URL_ENDPOINT = your_image_kit_url_endpoint
+REACT_APP_PUBLIC_KEY = your_image_kit_public_key
+REACT_APP_API_URL = your_localhost_api_url          # http://localhost:8800
+REACT_APP_SOCKET_URL = your_localhost_socket_url # ws://localhost:8900
+```
+
+7. Start the API, frontend and WebSocket server
 
 - Start the API server:
 ```bash
@@ -82,7 +96,7 @@ cd frontend
 npm run start
 ```
 
-7. Open your browser and visit [http://localhost:3000](http://localhost:3000) to access the chat application.
+8. Open your browser and visit [http://localhost:3000](http://localhost:3000) to access the chat application.
 
 
 ## Technologies Used
