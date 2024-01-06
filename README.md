@@ -5,9 +5,7 @@ Chit-Chat is a web-app that allows you to engage in text messaging, group messag
 
 ## Video Demo
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tS2S6GHAja0?si=x5zgyQ4sKoLUcWMx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-<!-- [![Watch the video](https://img.youtube.com/vi/tS2S6GHAja0/maxresdefault.jpg)](https://youtu.be/tS2S6GHAja0) -->
+[![Watch the video](https://img.youtube.com/vi/tS2S6GHAja0/0.jpg)](https://youtu.be/tS2S6GHAja0)
 
 ## Features
 
