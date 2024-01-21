@@ -11,7 +11,7 @@ Click on the image below to watch the demo video on Youtube. ⬇
 
 To see the app in action, check out the live demo [here](https://chat-app-flame-three.vercel.app/).
 
-The API and Socket Server is deployed on Render.
+The API and Socket Server are deployed on Render.
 The Frontend is deployed on Vercel.
 
 ## Features
@@ -57,7 +57,7 @@ npm install
 5. Configure MongoDB and ImageKit for the API:
 
     Make sure you have MongoDB installed and running on your machine.
-    Create an account on Image Kit and get your accesss keys.
+    Create an account on Image Kit and get your access keys.
     Create a .env file in the api directory and provide the necessary environment variables:
 
 ```bash
@@ -68,10 +68,10 @@ IMAGEKIT_URL_ENDPOINT = your_image_kit_url_endpoint
 ```
 
 
-6. Configure ImageKit, API url and Socket Server on Frontend:
+6. Configure ImageKit, API url, and Socket Server on Frontend:
 
     Get the public key and URL endpoint of your ImageKit account.
-    Note the localhost address at which your Socket Server and API is running.
+    Note the localhost address at which your Socket Server and API are running.
     Create a .env file in the frontend directory and provide the necessary environment variables:
 
 ```bash
@@ -81,7 +81,7 @@ REACT_APP_API_URL = your_localhost_api_url          # http://localhost:8800
 REACT_APP_SOCKET_URL = your_localhost_socket_url # ws://localhost:8900
 ```
 
-7. Start the API, frontend and WebSocket server
+7. Start the API, frontend, and WebSocket server
 
 - Start the API server:
 ```bash
@@ -95,7 +95,7 @@ cd socket
 npm run start
 ```
 
-- Start the WebSocket server
+- Start the React app
 ```bash
 cd frontend
 npm run start
